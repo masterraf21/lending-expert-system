@@ -12,3 +12,6 @@ class InferenceEngine():
 
     def reset(self):
         pass
+
+    def eval(self):
+        pass
