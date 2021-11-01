@@ -1,5 +1,6 @@
-;;; DEFTEMPLATES & DEFFACTS
-
+;;; #######################
+;;; ALGORITHM
+;;; #######################
 
 ;;; Borrower information
 (deftemplate borrower

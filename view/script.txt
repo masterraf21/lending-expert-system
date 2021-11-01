@@ -1,0 +1,12 @@
+Siapa nama anda: yumna
+Berapa uang yang ingin anda pinjam: 50.000.000
+Berapa lama anda akan berencana mengembalikan (6 bulan): 6
+
+Apakah anda berumur diatas 21 (y/n): y
+Apakah anda punya ktp (y/n): y
+Apakah anda berstatus wni (y/n): y
+
+
+
+Anda boleh meminjam //
+Anda tidak boleh meminjam
