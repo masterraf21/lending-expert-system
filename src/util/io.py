@@ -51,17 +51,17 @@ def sanitize_data(raw_data: dict) -> dict:
     data = {}
     # prerequisite data
     assert_raw_boolean('has_ktp', raw_data, data, 'y')
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
+    assert_raw_boolean('is_wni', raw_data, data, 'y')
+    assert_raw_boolean('is_domisili_indo', raw_data, data, 'y')
+    assert_raw_boolean('is_age_over_21', raw_data, data, 'y')
     # job related data
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
-    assert_raw_boolean('has_ktp', raw_data, data, 'y')
+    assert_raw_boolean('has_steady_job', raw_data, data, 'y')
+    assert_raw_boolean('has_steady_income', raw_data, data, 'y')
+    assert_raw_boolean('has_monthly_income', raw_data, data, 'y')
+    assert_raw_boolean('has_personal_bank_account', raw_data, data, 'y')
     # income related data
     assert_raw_float('monthly_income', raw_data, data)
-    assert_raw_float('monthly spending', raw_data, data)
+    assert_raw_float('monthly_spending', raw_data, data)
     # loan related
     assert_raw_float('loan_amount', raw_data, data)
     assert_raw_int('suggested_duration', raw_data, data)

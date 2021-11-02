@@ -3,6 +3,7 @@ from model import load_clp
 from util import count_loan_duration, parse_single_facts
 import logging
 from colorlog import ColoredFormatter
+import json
 
 
 class InferenceEngine():
@@ -18,29 +19,33 @@ class InferenceEngine():
         log = logging.getLogger('pythonConfig')
         log.setLevel(self.log_level)
         log.addHandler(stream)
+        self.logger = log
         # Setup CLIPS Environment
+        log.info("Initiating Inference Engine....")
         self.env = Environment()
         for clp in load_clp():
             self.env.build(clp)
         self.result_facts = {}
 
         # debugging
-        if self.log_level == logging.DEBUG:
-            log.debug("Printing Loaded Rules....")
-            for rule in self.env._agenda.rules():
-                log.debug(rule)
-            log.debug("Printing Loaded Templates...")
-            for template in self.env._facts.templates():
-                log.debug(template)
+        log.debug("Printing Loaded Rules....")
+        for rule in self.env._agenda.rules():
+            log.debug(rule)
+        log.debug("Printing Loaded Templates...")
+        for template in self.env._facts.templates():
+            log.debug(template)
 
     def reset(self):
+        self.logger.info("Resetting CLIPS state.....")
         self.env.reset()
-        self.result_facts()
+        self.result_facts = {}
 
     def check_result(self) -> bool:
         return ('loan_accepted' in self.result_facts)
 
     def infer(self, data: dict):
+        self.logger.debug("Printing Sanitized data...")
+        self.logger.debug(data)
         # input data with templates
         prereq_template = self.env._facts.find_template('prerequisite')
         prereq_facts = prereq_template.assert_fact(
@@ -70,6 +75,9 @@ class InferenceEngine():
             income=data['monthly_income'],
             spending=data['monthly_spending']
         )
+        self.logger.debug("Printing Loan Duration....")
+        self.logger.debug(f"Duration: {loan_duration}")
+
         loan_template = self.env._facts.find_template('loan_related')
         loan_facts = loan_template.assert_fact(
             duration=loan_duration,
@@ -91,9 +99,14 @@ class InferenceEngine():
         self.env._agenda.run(200)
 
         implied_facts = []
+        self.logger.debug("Printing Implied Facts.....")
         for fact in self.env._facts.facts():
             if isinstance(fact, ImpliedFact):
+                self.logger.debug(fact)
                 implied_facts.append(str(fact))
 
         result_facts = parse_single_facts(implied_facts)
+        self.logger.debug("Printing Result Facts Dicitonary......")
+        self.logger.debug(result_facts)
+
         self.result_facts = result_facts

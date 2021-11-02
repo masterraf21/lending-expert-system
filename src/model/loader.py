@@ -9,13 +9,13 @@ def load_clp() -> list:
     output = []
     with open(templates_file, 'r') as file:
         string = file.read().replace('\n', '')
-        rules = string.split(';')
-        for rule in rules:
-            output.append(rule)
-
-    with open(rules_file, 'r') as file:
-        string = file.read().replace('\n', '')
         templates = string.split(';')
         for template in templates:
             output.append(template)
+
+    with open(rules_file, 'r') as file:
+        string = file.read().replace('\n', '')
+        rules = string.split(';')
+        for rule in rules:
+            output.append(rule)
     return output
