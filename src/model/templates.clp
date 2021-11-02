@@ -26,9 +26,9 @@
 
 ;;; Income related facts
 (deftemplate loan_related
-    (slot loan_amount (type FLOAT))
-    (slot loan_duration (type INTEGER))
-    (slot suggested_loan_duration (type INTEGER))
+    ; (slot loan_amount (type FLOAT))
+    (slot duration (type INTEGER))
+    (slot suggested_duration (type INTEGER))
 )
 
 ;;; Guarantee related facts
