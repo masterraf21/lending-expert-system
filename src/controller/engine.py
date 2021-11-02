@@ -1,26 +1,23 @@
 from clips import *
+from clips.functions import DEFFUNCTION
 from util import count_loan_duration, parse_single_facts
 
 
 class InferenceEngine():
     def __init__(self, clp_files=[]) -> None:
         self.env = Environment()
+        self.result_facts = {}
         for clp_file in clp_files:
             self.env.load(clp_file)
 
-    def init_agent(self):
-        pass
-
-    def run(self):
-        pass
-
     def reset(self):
         self.env.reset()
+        self.result_facts()
 
-    def eval(self):
-        self.env.eval()
+    def check_result(self) -> bool:
+        return ('loan_accepted' in self.result_facts)
 
-    def infer(self, data: dict) -> dict:
+    def infer(self, data: dict):
         # input data with templates
         prereq_template = self.env._facts.find_template('prerequisite')
         prereq_facts = prereq_template.assert_fact(
@@ -76,4 +73,4 @@ class InferenceEngine():
                 implied_facts.append(str(fact))
 
         result_facts = parse_single_facts(implied_facts)
-        return result_facts
+        self.result_facts = result_facts
