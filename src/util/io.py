@@ -6,13 +6,12 @@ class Prompt():
 
 
 def prompt_question(question: str, example_answer: str, type: str = "string", accepted_anwers: list = []):
-    accepted = False
-    # format_question = "%s. (%s): ".format(question, example_answer)
     format_question = f"{question}. ({example_answer}): "
 
     if type == "string":
-        ans = input(format_question)
+        accepted = False
         while(not accepted):
+            ans = input(format_question)
             if ans in accepted_anwers:
                 accepted = True
                 return ans
