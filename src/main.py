@@ -1,6 +1,6 @@
 import sys
 import os
-from view import JsonView
+from view import JsonView, CLIView
 
 if __name__ == '__main__':
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -14,6 +14,12 @@ if __name__ == '__main__':
             json_view.process_file()
             json_view.print_result()
     elif arg[1] == "c":
-        print("Belum implemen hehe")
+        print("Selamat datang di Expert System Peminjaman")
+        print("\n\n")
+        cli_view = CLIView()
+        cli_view.get_data()
+        cli_view.process_data()
+        cli_view.print_result()
+
     else:
         print("HELLO")

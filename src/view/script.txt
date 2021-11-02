@@ -5,8 +5,21 @@ Berapa lama anda akan berencana mengembalikan (6 bulan): 6
 Apakah anda berumur diatas 21 (y/n): y
 Apakah anda punya ktp (y/n): y
 Apakah anda berstatus wni (y/n): y
+Apakah anda berdomisili di Indonesia (y/n): y
 
+Apakah anda memiliki pekerjaan tetap (y/n): y
+Apakah anda memiliki pendapatan tetap (y/n): y
+Apakah anda memiliki pendapatan bulanan (y/n): y
+Apakah anda memiliki rekening bank pribadi (y/n): y
 
+Berapa pendapatan bulanan anda (500000): 500
+Berapa pengeluaran bulanan anda (100000): 500
+
+Apakah anda punya aset berharga sebagai jaminan (y/n): y
+Apakah anda memiliki kerabat yang bisa dihubungi (y/n): y
+
+Apakah bersedia memenuhi ketentuan syarat pembayaran dan jaminan (y/n): y
+Apakah bersedia dengan ketentuan dan syarat layanan (y/n): y
 
 Anda boleh meminjam //
 Anda tidak boleh meminjam

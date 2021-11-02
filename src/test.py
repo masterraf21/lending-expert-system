@@ -8,7 +8,7 @@ from controller import InferenceEngine
 class TestEngine(unittest.TestCase):
     def test_engine_with_dummy(self):
         dummy_data = {
-            'has_ktp': 'y',
+            'has_ktp': 'n',
             'is_wni': 'y',
             'is_domisili_indo': 'y',
             'is_age_over_21': 'y',
@@ -27,7 +27,7 @@ class TestEngine(unittest.TestCase):
         }
         data = sanitize_data(dummy_data)
 
-        engine = InferenceEngine(log_level=logging.NOTSET)
+        engine = InferenceEngine(log_level=logging.DEBUG)
         engine.infer(data)
         result = engine.check_result()
         engine.reset()

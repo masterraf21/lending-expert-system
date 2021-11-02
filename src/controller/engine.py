@@ -97,6 +97,9 @@ class InferenceEngine():
         )
 
         self.env._agenda.run(200)
+        self.logger.debug("Printing Activated Rules")
+        for rule in self.env._agenda.activations():
+            self.logger.debug(rule)
 
         implied_facts = []
         self.logger.debug("Printing Implied Facts.....")
