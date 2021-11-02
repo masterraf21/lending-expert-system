@@ -39,6 +39,6 @@
 
 ;;; Compliance related facts
 (deftemplate comply_related
-    (slot is_comply_with_payment_terms )
-    (slot is_comply_with_service_terms )
+    (slot is_comply_with_payment_terms)
+    (slot is_comply_with_service_terms)
 )
