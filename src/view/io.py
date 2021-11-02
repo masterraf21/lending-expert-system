@@ -57,6 +57,7 @@ def sanitize_data(raw_data: dict) -> dict:
     assert_raw_float('monthly_income', raw_data, data)
     assert_raw_float('monthly spending', raw_data, data)
     # loan related
+    assert_raw_float('loan_amount', raw_data, data)
     assert_raw_int('suggested_duration', raw_data, data)
     # guarantee related data
     assert_raw_boolean('has_valuable_asset', raw_data, data, 'y')
