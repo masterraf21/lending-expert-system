@@ -1,14 +1,29 @@
 from clips import *
-from clips.functions import DEFFUNCTION
+from model import load_clp
 from util import count_loan_duration, parse_single_facts
+import logging
 
 
 class InferenceEngine():
-    def __init__(self, clp_files=[]) -> None:
+    def __init__(self, log_level=0) -> None:
         self.env = Environment()
+        for clp in load_clp():
+            self.env.build(clp)
         self.result_facts = {}
-        for clp_file in clp_files:
-            self.env.load(clp_file)
+
+        self.log_level = log_level
+        print(self.log_level)
+        log_format = '%(asctime)s - %(levelname)s - %(message)s'
+        logging.basicConfig(level=self.log_level, format=log_format)
+
+        # debugging
+        if self.log_level == logging.DEBUG:
+            logging.debug("Printing Loaded Rules....")
+            for rule in self.env._agenda.rules():
+                logging.debug(rule)
+            logging.debug("Printing Loaded Templates...")
+            for template in self.env._facts.templates():
+                logging.debug(template)
 
     def reset(self):
         self.env.reset()

@@ -34,11 +34,17 @@ def assert_raw_boolean(key: str, raw_data: list, data: list, answer: str):
 
 
 def assert_raw_float(key: str, raw_data: list, data: list):
-    data[key] = float(raw_data[key]) if key in raw_data else data[key] = float(0)
+    if key in raw_data:
+        data[key] = float(raw_data[key])
+    else:
+        data[key] = float(0)
 
 
 def assert_raw_int(key: str, raw_data: list, data: list):
-    data[key] = int(raw_data[key]) if key in raw_data else data[key] = int(0)
+    if key in raw_data:
+        data[key] = int(raw_data[key])
+    else:
+        data[key] = int(0)
 
 
 def sanitize_data(raw_data: dict) -> dict:
