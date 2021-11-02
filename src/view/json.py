@@ -6,7 +6,7 @@ import logging
 class JsonView():
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
-        self.engine = InferenceEngine(log_level=logging.ERROR)
+        self.engine = InferenceEngine(log_level=logging.DEBUG)
         self.result = False
 
     def process_file(self):

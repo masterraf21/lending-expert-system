@@ -3,6 +3,7 @@ def count_loan_duration(
         income: float,
         spending: float) -> int:
     surplus = income - spending
+
     if (loan_amount % surplus == 0):
         duration = loan_amount / surplus
     else:
