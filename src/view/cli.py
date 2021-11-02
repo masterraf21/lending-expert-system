@@ -2,7 +2,7 @@ from controller import InferenceEngine
 from util import prompt_question, sanitize_data
 import logging
 
-yn = "(y/n)"
+yn = "y/n"
 acc = ["y", "n"]
 
 
@@ -19,12 +19,13 @@ class CLIView():
         self.engine.reset()
 
     def print_result(self):
+        print("\n")
         if self.result:
             print("Pinjaman Diterima")
         else:
             print("Pinjaman Tidak Diterima")
 
-    def get_data(self) -> dict:
+    def get_data(self):
         input_data = {}
 
         amount = prompt_question(

@@ -15,9 +15,7 @@ if __name__ == '__main__':
             json_view.print_result()
     elif arg[1] == "c":
         print("Selamat datang di Expert System Peminjaman")
-        print("\n\n")
         cli_view = CLIView()
-        cli_view.get_data()
         cli_view.process_data()
         cli_view.print_result()
 

@@ -1,7 +1,7 @@
 all: run
 
 run: 
-	python3 src/main.py
+	python3 src/main.py c
 
 testz:
 	python3 src/test.py

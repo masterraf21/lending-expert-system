@@ -7,9 +7,10 @@ class Prompt():
 
 def prompt_question(question: str, example_answer: str, type: str = "string", accepted_anwers: list = []):
     accepted = False
-    format_question = "%s. (%s): ".format(question, example_answer)
+    # format_question = "%s. (%s): ".format(question, example_answer)
+    format_question = f"{question}. ({example_answer}): "
 
-    if type == "str":
+    if type == "string":
         ans = input(format_question)
         while(not accepted):
             if ans in accepted_anwers:
@@ -22,7 +23,7 @@ def prompt_question(question: str, example_answer: str, type: str = "string", ac
         return ans
 
     elif type == "int":
-        ans = int(format_question)
+        ans = int(input(format_question))
         return ans
 
 
