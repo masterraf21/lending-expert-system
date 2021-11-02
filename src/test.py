@@ -27,7 +27,7 @@ class TestEngine(unittest.TestCase):
         }
         data = sanitize_data(dummy_data)
 
-        engine = InferenceEngine(log_level=logging.INFO)
+        engine = InferenceEngine(log_level=logging.NOTSET)
         engine.infer(data)
         result = engine.check_result()
         engine.reset()
