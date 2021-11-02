@@ -10,8 +10,14 @@ class InferenceEngine():
     def init_agent(self):
         pass
 
-    def reset(self):
+    def run(self):
         pass
 
+    def reset(self):
+        self.env.reset()
+
     def eval(self):
+        self.env.eval()
+
+    def process_data(self, data: dict):
         pass

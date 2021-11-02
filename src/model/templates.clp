@@ -24,7 +24,7 @@
     (slot monthly_spending (type FLOAT))
 )
 
-;;; Income related facts
+;;; Loan related facts
 (deftemplate loan_related
     ; (slot loan_amount (type FLOAT))
     (slot duration (type INTEGER))
