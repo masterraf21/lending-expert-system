@@ -6,7 +6,7 @@ import logging
 class JsonView():
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
-        self.engine = InferenceEngine(log_level=logging.DEBUG)
+        self.engine = InferenceEngine()
         self.result = False
 
     def process_file(self):
@@ -18,6 +18,6 @@ class JsonView():
 
     def print_result(self):
         if self.result:
-            print("Loan Accepted")
+            print("Pinjaman Diterima")
         else:
-            print("Loan Not Accepted")
+            print("Pinjaman Tidak Diterima")

@@ -1,16 +1,18 @@
 from clips import *
-from model import load_clp
+from model import load_clp_files
 from util import count_loan_duration, parse_single_facts
 import logging
 from colorlog import ColoredFormatter
 import json
 
+DEFAULT_LOG_LEVEL = logging.ERROR
+LOGFORMAT = "  %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(message)s%(reset)s"
+
 
 class InferenceEngine():
-    def __init__(self, log_level=0) -> None:
+    def __init__(self, log_level=DEFAULT_LOG_LEVEL) -> None:
         # Setup logging facilitator
         self.log_level = log_level
-        LOGFORMAT = "  %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(message)s%(reset)s"
         logging.root.setLevel(self.log_level)
         formatter = ColoredFormatter(LOGFORMAT)
         stream = logging.StreamHandler()
@@ -20,20 +22,21 @@ class InferenceEngine():
         log.setLevel(self.log_level)
         log.addHandler(stream)
         self.logger = log
+
         # Setup CLIPS Environment
         log.info("Initiating Inference Engine....")
         self.env = Environment()
-        for clp in load_clp():
-            self.env.build(clp)
+        for file in load_clp_files():
+            self.env.load(path=file)
         self.result_facts = {}
 
         # debugging
-        log.debug("Printing Loaded Rules....")
+        self.logger.debug("Printing Loaded Rules....")
         for rule in self.env._agenda.rules():
-            log.debug(rule)
-        log.debug("Printing Loaded Templates...")
+            self.logger.debug(rule)
+        self.logger.debug("Printing Loaded Templates...")
         for template in self.env._facts.templates():
-            log.debug(template)
+            self.logger.debug(template)
 
     def reset(self):
         self.logger.info("Resetting CLIPS state.....")
@@ -45,7 +48,7 @@ class InferenceEngine():
 
     def infer(self, data: dict):
         self.logger.debug("Printing Sanitized data...")
-        self.logger.debug(data)
+        self.logger.debug(json.dumps(data, indent=4))
         # input data with templates
         prereq_template = self.env._facts.find_template('prerequisite')
         prereq_facts = prereq_template.assert_fact(
@@ -97,9 +100,6 @@ class InferenceEngine():
         )
 
         self.env._agenda.run(200)
-        self.logger.debug("Printing Activated Rules")
-        for rule in self.env._agenda.activations():
-            self.logger.debug(rule)
 
         implied_facts = []
         self.logger.debug("Printing Implied Facts.....")
@@ -110,6 +110,6 @@ class InferenceEngine():
 
         result_facts = parse_single_facts(implied_facts)
         self.logger.debug("Printing Result Facts Dicitonary......")
-        self.logger.debug(result_facts)
+        self.logger.debug(json.dumps(result_facts, indent=4))
 
         self.result_facts = result_facts

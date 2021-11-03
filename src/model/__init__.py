@@ -1,1 +1,1 @@
-from .loader import load_clp
+from .loader import load_clp_files

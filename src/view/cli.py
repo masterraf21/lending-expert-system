@@ -8,7 +8,7 @@ acc = ["y", "n"]
 
 class CLIView():
     def __init__(self) -> None:
-        self.engine = InferenceEngine(log_level=logging.ERROR)
+        self.engine = InferenceEngine()
         self.clean_data = {}
         self.result = False
 
