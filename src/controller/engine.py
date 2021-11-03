@@ -1,30 +1,19 @@
 from clips import *
 from model import load_clp_files
-from util import count_loan_duration, parse_single_facts
+from util import count_loan_duration, parse_single_facts, init_logger
 import logging
-from colorlog import ColoredFormatter
 import json
 
 DEFAULT_LOG_LEVEL = logging.ERROR
-LOGFORMAT = "  %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(message)s%(reset)s"
 
 
 class InferenceEngine():
     def __init__(self, log_level=DEFAULT_LOG_LEVEL) -> None:
         # Setup logging facilitator
-        self.log_level = log_level
-        logging.root.setLevel(self.log_level)
-        formatter = ColoredFormatter(LOGFORMAT)
-        stream = logging.StreamHandler()
-        stream.setLevel(self.log_level)
-        stream.setFormatter(formatter)
-        log = logging.getLogger('pythonConfig')
-        log.setLevel(self.log_level)
-        log.addHandler(stream)
-        self.logger = log
+        self.logger = init_logger(log_level)
 
         # Setup CLIPS Environment
-        log.info("Initiating Inference Engine....")
+        self.logger.info("Initiating Inference Engine....")
         self.env = Environment()
         for file in load_clp_files():
             self.env.load(path=file)

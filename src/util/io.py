@@ -7,9 +7,9 @@ class Prompt():
 
 def prompt_question(question: str, example_answer: str, type: str = "string", accepted_anwers: list = []):
     format_question = f"{question}. ({example_answer}): "
+    accepted = False
 
     if type == "string":
-        accepted = False
         while(not accepted):
             ans = input(format_question)
             if ans in accepted_anwers:
@@ -18,12 +18,21 @@ def prompt_question(question: str, example_answer: str, type: str = "string", ac
             else:
                 print("Jawaban tidak sesuai pilihan, ulangi lagi")
     elif type == "float":
-        ans = float(input(format_question))
-        return ans
-
+        while (not accepted):
+            try:
+                ans = float(input(format_question))
+                accepted = True
+                return ans
+            except ValueError:
+                print("Jawaban tidak sesuai pilihan, ulangi lagi")
     elif type == "int":
-        ans = int(input(format_question))
-        return ans
+        while (not accepted):
+            try:
+                ans = int(input(format_question))
+                accepted = True
+                return ans
+            except ValueError:
+                print("Jawaban tidak sesuai pilihan, ulangi lagi")
 
 
 def assert_raw_boolean(key: str, raw_data: list, data: list, answer: str):
