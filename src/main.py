@@ -1,7 +1,7 @@
 import sys
 import os
 from view import *
-from view.web import WebView
+
 import logging
 
 if __name__ == '__main__':
