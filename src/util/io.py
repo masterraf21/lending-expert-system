@@ -1,9 +1,3 @@
-class Prompt():
-    data = {}
-
-    def __init__(self) -> None:
-        pass
-
 
 def prompt_question(question: str, example_answer: str, type: str = "string", accepted_anwers: list = []):
     format_question = f"{question}. ({example_answer}): "

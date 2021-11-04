@@ -1,6 +1,8 @@
 import sys
 import os
-from view import JsonView, CLIView
+from view import *
+from view.web import WebView
+import logging
 
 if __name__ == '__main__':
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -23,5 +25,8 @@ if __name__ == '__main__':
             print("\n")
             sys.exit("Byebye")
 
+    elif arg[1] == "w":
+        web_view = WebView()
+        web_view.run()
     else:
         print("HELLO")
