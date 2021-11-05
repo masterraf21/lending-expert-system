@@ -1,4 +1,4 @@
-clips==1.1.0
+clipspy==1.0.0
 colorlog==6.5.0
 Flask==2.0.2
 Flask_Cors==3.0.10

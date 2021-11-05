@@ -11,10 +11,10 @@ LOG_LEVEL = logging.ERROR
 
 
 class WebView():
-    def __init__(self, debug: bool = False, log_level=LOG_LEVEL, prod: bool = False) -> None:
+    def __init__(self, logger_name: str = "", debug: bool = False, log_level=LOG_LEVEL, prod: bool = False) -> None:
         self.engine = InferenceEngine(log_level=log_level)
         self.debug = debug
-        self.logger = init_logger(log_level)
+        self.logger = init_logger(log_level=log_level, logger_name=logger_name)
         self.prod = prod
 
     def run(self):
@@ -57,5 +57,7 @@ class WebView():
                 })
             )
             return res
-
-        app.run(debug=self.debug, port=5000, threaded=True, host='0.0.0.0')
+        if self.prod:
+            serve(app=app, host='0.0.0.0', port=5000)
+        else:
+            app.run(debug=self.debug, port=5000, threaded=True, host='0.0.0.0')

@@ -28,5 +28,11 @@ if __name__ == '__main__':
     elif arg[1] == "w":
         web_view = WebView()
         web_view.run()
+
+    elif arg[1] == "w-prod":
+        web_view = WebView(prod=True, logger_name='waitress',
+                           log_level=logging.INFO)
+        web_view.run()
+
     else:
         print("HELLO")

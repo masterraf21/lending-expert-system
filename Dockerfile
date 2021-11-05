@@ -11,7 +11,8 @@ RUN pip install -r requirements.txt
 
 FROM python:3.9-slim-buster AS build-image
 COPY --from=compile-image /opt/venv /opt/venv
-COPY src/ .
+COPY . .
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
-CMD ["gunicorn", "--bind=0.0.0.0:5000","-w 4", "server:app"]
+EXPOSE 5000
+CMD ["python", "src/main.py","w-prod"]
