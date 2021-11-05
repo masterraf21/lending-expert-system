@@ -3,22 +3,23 @@ from controller import InferenceEngine
 from util import init_logger
 import logging
 import json
-
+from flask_cors import CORS
+from waitress import serve
 from util.io import sanitize_data
 
 LOG_LEVEL = logging.ERROR
 
 
 class WebView():
-    def __init__(self, debug: bool = False, log_level=LOG_LEVEL) -> None:
+    def __init__(self, debug: bool = False, log_level=LOG_LEVEL, prod: bool = False) -> None:
         self.engine = InferenceEngine(log_level=log_level)
         self.debug = debug
         self.logger = init_logger(log_level)
+        self.prod = prod
 
     def run(self):
         app = flask.Flask(__name__)
-        # if self.debug:
-        #     app.config["DEBUG"] = self.debug
+        CORS(app)
 
         @app.route('/', methods=['GET'])
         def home():
@@ -30,7 +31,7 @@ class WebView():
             )
             return res
 
-        @app.route('/pinjam', methods=['POST'])
+        @app.route('/api', methods=['POST'])
         def handle_pinjam():
             raw_data = dict(flask.request.json)
             data = sanitize_data(raw_data)
@@ -40,17 +41,21 @@ class WebView():
             self.engine.infer(data)
             accepted = self.engine.check_result()
             result = ""
+            message = ""
             if accepted:
-                result = "Pinjaman Diterima"
+                result = "y"
+                message = "Pinjaman Diterima"
             else:
-                result = "Pinjaman Tidak Diterima"
+                result = "n"
+                message = "Pinjaman Tidak Diterima"
 
             res = app.response_class(
                 mimetype="application/json",
                 response=json.dumps({
-                    "hasil": result
+                    "data": result,
+                    "message": message
                 })
             )
             return res
 
-        app.run(debug=self.debug, port=5000)
+        app.run(debug=self.debug, port=5000, threaded=True, host='0.0.0.0')

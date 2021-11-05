@@ -6,6 +6,9 @@ run:
 web:
 	python3 src/main.py w
 
+web-prod:
+	python3 src/main.py w prod
+
 testz:
 	python3 src/test.py
 
